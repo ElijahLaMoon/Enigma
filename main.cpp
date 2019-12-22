@@ -1,11 +1,6 @@
-#include "Rotor.cpp"
-#include "Rotor.hpp"
+#include <algorithm>
 #include <iostream>
-
-void makeRotors() {
-	Rotor firstRotor; // = Rotor();
-	rotorInitializer(firstRotor);	
-};
+#include "Rotor.cpp"
 
 bool defaulSettings() {
 	bool isDefaultOptions;
@@ -32,7 +27,32 @@ bool defaulSettings() {
 
 int main()
 {
-	
+	Rotor rotorInstance;
+	//-----------------------
+	//	testing zone
+	int rotorIndex;
+
+	std::cout << "Which rotor to use?" << std::endl;
+	std::cout << "Choose from 1 to 5: ";
+	std::cin >> rotorIndex;
+	rotorInstance.setRotor(rotorIndex);
+
+	std::string message;
+	std::cout << "Type your message: ";
+	std::cin >> message;
+
+	rotorInstance.substitute(message);
+	std::cout << "Ciphered message: " << message << std::endl;
+
+	/*	USE THIS CONSTRUCTION FOR OFFSETS
+	for (itr = message.begin(); itr != message.end(); ++itr)
+	{
+		std::cout << ++(*itr);
+	}
+	std::cout << std::endl;
+	*/
+
+	//-----------------------
 
 	return EXIT_SUCCESS;
 }

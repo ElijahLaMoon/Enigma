@@ -1,0 +1,17 @@
+[
+    {
+      "directory": "/home/elijah/VSCode/C++/enigma/build",
+      "command": "/usr/bin/clang++-9  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_QML_DEBUG -DQT_QML_LIB -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -I/home/elijah/VSCode/C++/enigma/build -I/home/elijah/VSCode/C++/enigma -I/home/elijah/VSCode/C++/enigma/build/enigma_autogen/include -g   -fPIC -std=gnu++11 -o CMakeFiles/enigma.dir/enigma_autogen/mocs_compilation.cpp.o -c /home/elijah/VSCode/C++/enigma/build/enigma_autogen/mocs_compilation.cpp",
+      "file": "/home/elijah/VSCode/C++/enigma/build/enigma_autogen/mocs_compilation.cpp"
+    },
+    {
+      "directory": "/home/elijah/VSCode/C++/enigma/build",
+      "command": "/usr/bin/clang++-9  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_QML_DEBUG -DQT_QML_LIB -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -I/home/elijah/VSCode/C++/enigma/build -I/home/elijah/VSCode/C++/enigma -I/home/elijah/VSCode/C++/enigma/build/enigma_autogen/include -g   -fPIC -std=gnu++11 -o CMakeFiles/enigma.dir/main.cpp.o -c /home/elijah/VSCode/C++/enigma/main.cpp",
+      "file": "/home/elijah/VSCode/C++/enigma/main.cpp"
+    },
+    {
+      "directory": "/home/elijah/VSCode/C++/enigma/build",
+      "command": "/usr/bin/clang++-9  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_QML_DEBUG -DQT_QML_LIB -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -I/home/elijah/VSCode/C++/enigma/build -I/home/elijah/VSCode/C++/enigma -I/home/elijah/VSCode/C++/enigma/build/enigma_autogen/include -g   -fPIC -std=gnu++11 -o CMakeFiles/enigma.dir/enigma_autogen/EWIEGA46WW/Rotor.cpp.o -c /home/elijah/VSCode/C++/enigma/build/enigma_autogen/EWIEGA46WW/Rotor.cpp",
+      "file": "/home/elijah/VSCode/C++/enigma/build/enigma_autogen/EWIEGA46WW/Rotor.cpp"
+    }
+    ]

@@ -1,23 +1,41 @@
 #ifndef ROTOR_HPP
 #define ROTOR_HPP
 
+#include <string>
+
 class Rotor
 {
-private:
-    /* data */
 public:
+    std::string rotor;
+    void setRotor(char);
+    void substitute(std::string&);
+
+private:
+    const std::string m_rotors[5] =
+    {
+    //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "EKMFLGDQVZNTOWYHXUSPAIBRCJ", //rotor I
+        "AJDKSIRUXBLHWTMCQGZNPYFVOE", //rotor II
+        "BDFHJLCPRTXVZNYEIWGAKMUSQO", //rotor III
+        "ESOVPZJAYQUIRHXLNFTGKDCMWB", //rotor IV
+        "VZBRGITYUPSDNHLXAWMJQOFECK"  //rotor V
+    };
     
-    char rotorIndex;
-    char rotorPosition[26];
-    Rotor() {
-        for (int i = 0; i < sizeof(rotorPosition); i++) {
-            short temp = 65;
-            rotorPosition[i] = temp;
-            temp++;
-        }
+    const std::string m_reflector =
+    {
+        "YRUHQSLDPXNGOKMIEBFZCWVJAT"
     };
 
-    ~Rotor();
+    std::string m_plugboard[6]
+    {
+        "\0\0",
+        "\0\0",
+        "\0\0",
+        "\0\0",
+        "\0\0",
+        "\0\0",
+    };
+
 };
 
 #endif
