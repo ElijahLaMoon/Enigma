@@ -20,11 +20,6 @@ private:
         "ESOVPZJAYQUIRHXLNFTGKDCMWB", //rotor IV
         "VZBRGITYUPSDNHLXAWMJQOFECK"  //rotor V
     };
-    
-    const std::string m_reflector =
-    {
-        "YRUHQSLDPXNGOKMIEBFZCWVJAT"
-    };
 
     std::string m_plugboard[6]
     {

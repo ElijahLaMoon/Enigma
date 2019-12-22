@@ -23,13 +23,9 @@ void Rotor::substitute(std::string& message)
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     };
     
-    std::string::iterator messageIterator;
-    std::string::iterator alphabetIterator;
-    std::string::iterator rotorIterator;
-    
-    for (messageIterator = message.begin(); messageIterator != message.end(); ++messageIterator)
+    for (auto messageIterator = message.begin(); messageIterator != message.end(); ++messageIterator)
     {
-        for (alphabetIterator = alphabet.begin(), rotorIterator = rotor.begin(); alphabetIterator != alphabet.end(), rotorIterator != rotor.end(); ++alphabetIterator, ++rotorIterator)
+        for (auto alphabetIterator = alphabet.begin(), rotorIterator = rotor.begin(); alphabetIterator != alphabet.end(), rotorIterator != rotor.end(); ++alphabetIterator, ++rotorIterator)
         {
             if (*messageIterator == *alphabetIterator)
             {
