@@ -53,33 +53,30 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 
 int Enigma::start()
 {
-	// TODO how to access rotors from the array below?
 	std::array<Rotor, 3> rotors;
-	int firstRotorIndex;
-	int secondRotorIndex;
-	int thirdRotorIndex;
+	int rotorIndexes[3];
 
 	std::cout << "Set up 3 rotors. Choose from 1 to 5. Repeats restricted" << std::endl;
 
 	std::cout << "First rotor: ";
-	std::cin >> firstRotorIndex;
-	rotors[0].setRotor(firstRotorIndex);
+	std::cin >> rotorIndexes[0];
+	rotors[0].setRotor(rotorIndexes[0]);
 
 	std::cout << "Second rotor: ";
-	std::cin >> secondRotorIndex;
-	if (duplicateCheck(firstRotorIndex, secondRotorIndex, thirdRotorIndex))
+	std::cin >> rotorIndexes[1];
+	if (duplicateCheck(rotorIndexes[0], rotorIndexes[1], rotorIndexes[2]))
 	{
 		return EXIT_FAILURE;
 	}
-	rotors[1].setRotor(secondRotorIndex);
+	rotors[1].setRotor(rotorIndexes[1]);
 
 	std::cout << "Third rotor: ";
-	std::cin >> thirdRotorIndex;
-	if (duplicateCheck(firstRotorIndex, secondRotorIndex, thirdRotorIndex))
+	std::cin >> rotorIndexes[2];
+	if (duplicateCheck(rotorIndexes[0], rotorIndexes[1], rotorIndexes[2]))
 	{
 		return EXIT_FAILURE;
 	}
-	rotors[2].setRotor(thirdRotorIndex);
+	rotors[2].setRotor(rotorIndexes[2]);
 
 	std::string ringSettings[3];
 	std::cout << "Set up rings. Enter 3 characters from A to Z. Not case sensitive" << std::endl;
