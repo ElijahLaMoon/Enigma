@@ -6,3 +6,4 @@ main
 .vscode/*
 e_original
 enigma
+.gitignore
