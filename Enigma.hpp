@@ -7,7 +7,7 @@ public:
     std::string ringSettings[3];
     bool defaultSettings();
     bool duplicateCheck(int, int, int);
-    bool setRingSettings(std::string&);
+    bool setRingSettings(std::string &);
     int start();
 };
 

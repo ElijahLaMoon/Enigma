@@ -1,9 +1,9 @@
 #include <iostream>
-#include "Enigma.cpp"
+#include "Enigma.hpp"
 
 int main()
 {
-    std::cout << "Welcome to Enigma!" << std::endl;
+	std::cout << "Welcome to Enigma!" << std::endl;
 	Enigma enigma;
 	enigma.start();
 
