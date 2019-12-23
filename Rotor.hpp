@@ -9,10 +9,12 @@ public:
     std::string rotor;
     char ring;
     void setRotor(char);
-    void substitute(std::string&);
+    void substitute(std::string&, char);
     void offset(std::string&);
+    void ringApply(char, std::string&);
 
 private:
+    // TODO turn m_rotors to either std::array<...> or constexpr static?
     const std::string m_rotors[5] =
     {
     //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <iostream>
-#include <string>
 #include "Rotor.hpp"
 
 void Rotor::setRotor(char choice)
@@ -16,12 +15,11 @@ void Rotor::setRotor(char choice)
     }
 }
 
-void Rotor::substitute(std::string &message)
+void Rotor::substitute(std::string &message, char ring)
 {
     std::transform(message.begin(), message.end(), message.begin(), ::toupper);
-    std::string alphabet =
-        {
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
+    std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    ringApply(ring, alphabet);
 
     for (auto messageIterator = message.begin(); messageIterator != message.end(); ++messageIterator)
     {
@@ -37,10 +35,9 @@ void Rotor::substitute(std::string &message)
     }
 }
 
-// TODO make offsets react to ring settings
 void Rotor::offset(std::string &alphabet)
 {
-    for (auto& alphabetIterator : alphabet)
+    for (auto &alphabetIterator : alphabet)
     {
         if (alphabetIterator == 'Z')
         {
@@ -48,5 +45,14 @@ void Rotor::offset(std::string &alphabet)
         }
         else
             ++alphabetIterator;
+    }
+}
+
+void Rotor::ringApply(char ring, std::string &alphabet)
+{
+    auto numberOfIterations = ring - 65;
+    for (int i = 0; i < numberOfIterations; i++)
+    {
+        offset(alphabet);
     }
 }
