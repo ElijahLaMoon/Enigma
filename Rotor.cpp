@@ -30,7 +30,21 @@ void Rotor::substitute(std::string& message)
             if (*messageIterator == *alphabetIterator)
             {
                 *messageIterator = *rotorIterator;
+                offset(alphabet);
+                break;
             }
         } 
     }
+}
+
+// TODO make offsets react to ring settings
+void Rotor::offset(std::string& alphabet)
+{
+	for (auto alphabetIterator = alphabet.begin(); alphabetIterator != alphabet.end(); ++alphabetIterator)
+	{
+        if (*alphabetIterator == 'Z')
+        {
+            *alphabetIterator = 'A';
+        } else ++(*alphabetIterator);
+	}
 }

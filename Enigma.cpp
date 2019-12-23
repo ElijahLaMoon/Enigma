@@ -1,11 +1,11 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
-#include <sstream>
 #include "Enigma.hpp"
 #include "Reflector.hpp"
 #include "Rotor.cpp"
 
+// TODO make default settings
 bool Enigma::defaultSettings()
 {
 	bool isDefaultOptions;
@@ -39,6 +39,17 @@ bool Enigma::duplicateCheck(int n_1, int n_2, int n_3)
     } else return false;
 }
 
+
+bool Enigma::setRingSettings(std::string& ringSettings)
+{
+    std::cin >> ringSettings;
+    if (ringSettings.length() != 3)
+    {
+        std::cout << "Bad input. Try again" << std::endl;
+        return true;
+    } else return false;
+}
+
 int Enigma::start()
 {
 	Rotor firstRotorInstance;
@@ -48,7 +59,7 @@ int Enigma::start()
 	int secondRotorIndex;
 	int thirdRotorIndex;
 
-	std::cout << "Set up 3 rotors. Choose between 1 to 5. Repeats restricted" << std::endl;
+	std::cout << "Set up 3 rotors. Choose from 1 to 5. Repeats restricted" << std::endl;
 	
 	std::cout << "First rotor: ";
 	std::cin >> firstRotorIndex;
@@ -70,23 +81,24 @@ int Enigma::start()
 	}
 	thirdRotorInstance.setRotor(thirdRotorIndex);
 
+    std::string ringSettings[3];
+    std::cout << "Set up rings. Enter 3 characters from A to Z. Not case sensitive" << std::endl;
+    if (setRingSettings(*ringSettings))
+    {
+        return EXIT_FAILURE;
+    }
+	firstRotorInstance.ring = ringSettings[0][0];
+	secondRotorInstance.ring = ringSettings[0][1];
+	thirdRotorInstance.ring = ringSettings[0][2];	
+
 	std::string message;
 	std::cout << "Type your message: ";
-    //  TODO make std::getline() work
+    std::cin.ignore();
     std::getline(std::cin, message);
 	firstRotorInstance.substitute(message);
+    secondRotorInstance.substitute(message);
+    thirdRotorInstance.substitute(message);
 	std::cout << "Ciphered message: " << message << std::endl;
-
-	/*	USE THIS CONSTRUCTION FOR OFFSETS
-	for (itr = message.begin(); itr != message.end(); ++itr)
-	{
-		std::cout << ++(*itr);
-	}
-	std::cout << std::endl;
-	*/
-
-
-	//-----------------------
 
 	return EXIT_SUCCESS;
 }

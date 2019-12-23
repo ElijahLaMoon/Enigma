@@ -7,8 +7,10 @@ class Rotor
 {
 public:
     std::string rotor;
+    char ring;
     void setRotor(char);
     void substitute(std::string&);
+    void offset(std::string&);
 
 private:
     const std::string m_rotors[5] =
