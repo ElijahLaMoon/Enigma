@@ -2,12 +2,13 @@
 #include <iostream>
 #include "Rotor.hpp"
 
-void Rotor::setRotor(char choice)
+void Rotor::setRotor(int choice)
 {
     if (choice > 0 && choice < 6)
     {
         --choice; //people count from 1, unlike machines
-        rotor = m_rotors[choice];
+        rotor = rotors[choice];
+        inverseRotor = inverseRotors[choice];
     }
     else
     {
@@ -15,44 +16,74 @@ void Rotor::setRotor(char choice)
     }
 }
 
-void Rotor::substitute(std::string &message, char ring)
+void Rotor::substitute(char &eachCharacter, char ring, int &offsetCounter, char mode)
 {
-    std::transform(message.begin(), message.end(), message.begin(), ::toupper);
-    std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    ringApply(ring, alphabet);
+    ringApply(ring);
+    switch (mode)
+    {
+    case 's':
+        for (auto alphabetIterator = alphabet.begin(), rotorIterator = rotor.begin(); alphabetIterator != alphabet.end(), rotorIterator != rotor.end(); ++alphabetIterator, ++rotorIterator)
+        {
+            if (eachCharacter == *alphabetIterator)
+            {
+                eachCharacter = *rotorIterator;
+                offsetCounter++;
+                break;
+            }
+        }
+        break;
+    
+    case 'r':
+        for (auto alphabetIterator = alphabet.begin(), inverseRotorIterator = inverseRotor.begin(); alphabetIterator != alphabet.end(), inverseRotorIterator != inverseRotor.end(); ++alphabetIterator, ++inverseRotorIterator)
+        {
+            if (eachCharacter == *alphabetIterator)
+            {
+                eachCharacter = *inverseRotorIterator;
+                break;
+            }
+        }
+        break;
+    }
 
+
+    /*
     for (auto messageIterator = message.begin(); messageIterator != message.end(); ++messageIterator)
     {
-        for (auto alphabetIterator = alphabet.begin(), rotorIterator = rotor.begin(); alphabetIterator != alphabet.end(), rotorIterator != rotor.end(); ++alphabetIterator, ++rotorIterator)
+        for (auto alphabetIterator = alphabet.begin(), rotorIterator = _rotor.begin(); alphabetIterator != alphabet.end(), rotorIterator != _rotor.end(); ++alphabetIterator, ++rotorIterator)
         {
             if (*messageIterator == *alphabetIterator)
             {
                 *messageIterator = *rotorIterator;
-                offset(alphabet);
+                offsetCounter++;
+                // offset(alphabet);
                 break;
             }
         }
     }
+    */
 }
 
-void Rotor::offset(std::string &alphabet)
+void Rotor::offset()
 {
     for (auto &alphabetIterator : alphabet)
     {
-        if (alphabetIterator == 'Z')
+        if (alphabetIterator == 'A')
         {
-            alphabetIterator = 'A';
+            alphabetIterator = 'Z';
         }
         else
-            ++alphabetIterator;
+        {
+            --alphabetIterator;
+        }
     }
 }
 
-void Rotor::ringApply(char ring, std::string &alphabet)
+void Rotor::ringApply(char ring)
 {
+    ring = toupper(ring);
     auto numberOfIterations = ring - 65;
     for (int i = 0; i < numberOfIterations; i++)
     {
-        offset(alphabet);
+        offset();
     }
 }

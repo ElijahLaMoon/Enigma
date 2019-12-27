@@ -6,16 +6,18 @@
 class Rotor
 {
 public:
-    std::string rotor;
+    std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char ring;
-    void setRotor(char);
-    void substitute(std::string&, char);
-    void offset(std::string&);
-    void ringApply(char, std::string&);
+    void setRotor(int);
+    void substitute(char &, char, int &, char);
+    void offset();
+    void ringApply(char);
 
 private:
+    std::string rotor;
+    std::string inverseRotor;
     // TODO turn m_rotors to either std::array<...> or constexpr static?
-    const std::string m_rotors[5] =
+    const std::string rotors[5] =
     {
     //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         "EKMFLGDQVZNTOWYHXUSPAIBRCJ", //rotor I
@@ -25,7 +27,16 @@ private:
         "VZBRGITYUPSDNHLXAWMJQOFECK"  //rotor V
     };
 
-    std::string m_plugboard[6]
+    const std::string inverseRotors[5] =
+    {
+        "UWYGADFPVZBECKMTHXSLRINQOJ",
+        "AJPCZWRLFBDKOTYUQGENHXMIVS",
+        "TAGBPCSDQEUFVNZHYIXJWLRKOM",
+        "HZWVARTNLGUPXQCEJMBSKDYOIF",
+        "QCYLXWENFTZOSMVJUDKGIARPHB"
+    };
+
+    std::string m_plugboard[10]
     {
         "\0\0",
         "\0\0",
@@ -33,6 +44,10 @@ private:
         "\0\0",
         "\0\0",
         "\0\0",
+        "\0\0",
+        "\0\0",
+        "\0\0",
+        "\0\0"
     };
 
 };

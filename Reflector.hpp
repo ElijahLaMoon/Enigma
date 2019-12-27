@@ -6,13 +6,11 @@
 class Reflector
 {
 public:
-    void setReflector(std::string&);
+    void reflectorSubstitute(char &);
+    std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 private:
-    const std::string m_reflector =
-    {
-        "YRUHQSLDPXNGOKMIEBFZCWVJAT"
-    };
+    std::string _reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
 };
 
 #endif
