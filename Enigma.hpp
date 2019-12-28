@@ -3,6 +3,7 @@
 
 #include <array>
 #include <string>
+#include "Reflector.hpp"
 #include "Rotor.hpp"
 
 class Enigma
@@ -10,10 +11,9 @@ class Enigma
 public:
     std::string ringSettings[3];
     bool defaultSettings();
-    bool correctInput(int);
-    bool duplicateCheck(std::array<int, 3>);
+    bool duplicateCheck(int, int, int);
     bool setRingSettings(std::string &);
-    void wholeCycle(std::array<Rotor, 3> &, char &);
+    void wholeCycle(std::array<Rotor, 3> &, Reflector &reflector, char &);
     int start();
 };
 

@@ -6,23 +6,9 @@
 #include "Reflector.hpp"
 #include "Rotor.hpp"
 
-bool Enigma::correctInput(int rotorIndex)
+bool Enigma::duplicateCheck(int indexOne, int indexTwo, int indexThree)
 {
-	if (rotorIndex < 1 || rotorIndex > 5)
-	{
-		std::cout << "Bad input. Try again" << std::endl;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-	
-}
-
-bool Enigma::duplicateCheck(std::array<int, 3> rotorIndexes)
-{
-	if (rotorIndexes.at(0) == rotorIndexes.at(1) || rotorIndexes.at(1) == rotorIndexes.at(2) || rotorIndexes.at(0) == rotorIndexes.at(2))
+	if (indexOne == indexTwo || indexOne == indexThree || indexTwo == indexThree)
 	{
 		std::cout << "Bad input. Try again" << std::endl;
 		return true;
@@ -48,55 +34,42 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 	std::transform(ringSettings.begin(), ringSettings.end(), ringSettings.begin(), ::toupper);
 }
 
-void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, char &eachCharacter)
+void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, char &eachCharacter)
 {
-    eachCharacter = toupper(eachCharacter);
-	std::array<int, 3> offsetCounters;
 	for (auto i = 2; i > -1; i--)
 	{
-		rotors[i].substitute(eachCharacter, rotors[i].ring, offsetCounters[i], 's');
+		rotors[i].substitute(eachCharacter, rotors[i].ring, 's');
 	}
 
-	Reflector reflector;
 	reflector.reflectorSubstitute(eachCharacter);
 
 	for (auto i = 0; i < 3; i++)
 	{
-		rotors[i].substitute(eachCharacter, rotors[i].ring, offsetCounters[i], 'r');
-	}
-	
-	for (auto i = 0; i < 3; i++)
-	{
-		offsetCounters[i] /= 2;
-		for (auto j = 0; j < offsetCounters[i]; j++)
-		{
-			rotors[i].offset();
-		}
+		rotors[i].substitute(eachCharacter, rotors[i].ring, 'r');
+		rotors[i].offset();
 	}
 }
 
 int Enigma::start()
 {
 	std::array<Rotor, 3> rotors;
-	std::array<int, 3> rotorIndexes;
+	int rotorIndexes[3];
 
 	std::cout << "Set up 3 rotors. Choose from 1 to 5. Repeats restricted" << std::endl;
 
 	std::cout << "First rotor: ";
 	std::cin >> rotorIndexes[0];
-	if (correctInput(rotorIndexes.at(0)))
-	{
-		return EXIT_FAILURE;
-	}
+	// TODO add check whether correctInput()
+	rotors[0].setRotor(rotorIndexes[0]);
 	std::cout << "Second rotor: ";
 	std::cin >> rotorIndexes[1];
-	if(correctInput(rotorIndexes.at(1) || duplicateCheck(rotorIndexes)))
+	if (duplicateCheck(rotorIndexes[0], rotorIndexes[1], rotorIndexes[2]))
 	{
 		return EXIT_FAILURE;
 	}
 	std::cout << "Third rotor: ";
 	std::cin >> rotorIndexes[2];
-	if(correctInput(rotorIndexes.at(2) || duplicateCheck(rotorIndexes)))
+	if (duplicateCheck(rotorIndexes[0], rotorIndexes[1], rotorIndexes[2]))
 	{
 		return EXIT_FAILURE;
 	}
@@ -115,13 +88,18 @@ int Enigma::start()
 		rotors[i].ring = ringSettings[0][i];
 	}
 
+	Reflector reflector;
 	std::string message;
 	std::cout << "Type your message: ";
 	std::cin.ignore();
 	std::getline(std::cin, message);
+    std::transform(message.begin(), message.end(), message.begin(), ::toupper);
 	for (auto &eachCharacter : message)
 	{
-		wholeCycle(rotors, eachCharacter);
+		if (eachCharacter > 64 && eachCharacter < 91)
+		{
+			wholeCycle(rotors, reflector, eachCharacter);
+		}
 	}
 	std::cout << "Ciphered message: " << message << std::endl;
 

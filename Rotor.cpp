@@ -16,7 +16,7 @@ void Rotor::setRotor(int choice)
     }
 }
 
-void Rotor::substitute(char &eachCharacter, char ring, int &offsetCounter, char mode)
+void Rotor::substitute(char &eachCharacter, char ring, char mode)
 {
     ringApply(ring);
     switch (mode)
@@ -27,7 +27,6 @@ void Rotor::substitute(char &eachCharacter, char ring, int &offsetCounter, char 
             if (eachCharacter == *alphabetIterator)
             {
                 eachCharacter = *rotorIterator;
-                offsetCounter++;
                 break;
             }
         }
@@ -44,23 +43,6 @@ void Rotor::substitute(char &eachCharacter, char ring, int &offsetCounter, char 
         }
         break;
     }
-
-
-    /*
-    for (auto messageIterator = message.begin(); messageIterator != message.end(); ++messageIterator)
-    {
-        for (auto alphabetIterator = alphabet.begin(), rotorIterator = _rotor.begin(); alphabetIterator != alphabet.end(), rotorIterator != _rotor.end(); ++alphabetIterator, ++rotorIterator)
-        {
-            if (*messageIterator == *alphabetIterator)
-            {
-                *messageIterator = *rotorIterator;
-                offsetCounter++;
-                // offset(alphabet);
-                break;
-            }
-        }
-    }
-    */
 }
 
 void Rotor::offset()

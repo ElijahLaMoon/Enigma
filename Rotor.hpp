@@ -9,7 +9,7 @@ public:
     std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char ring;
     void setRotor(int);
-    void substitute(char &, char, int &, char);
+    void substitute(char &, char, char);
     void offset();
     void ringApply(char);
 
