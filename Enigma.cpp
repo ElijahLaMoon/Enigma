@@ -22,6 +22,7 @@ bool Enigma::duplicateCheck(int indexOne, int indexTwo, int indexThree)
 bool Enigma::setRingSettings(std::string &ringSettings)
 {
 	std::cin >> ringSettings;
+	std::transform(ringSettings.begin(), ringSettings.end(), ringSettings.begin(), ::toupper);
 	if (ringSettings.length() != 3)
 	{
 		std::cout << "Bad input. Try again" << std::endl;
@@ -29,24 +30,35 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 	}
 	else
 	{
+		for (auto &iterator : ringSettings)
+		{
+			if (!(iterator > 64 && iterator < 91))
+			{
+				std::cout << "Bad input. Try again" << std::endl;
+				return true;
+			}
+		}
 		return false;
 	}
-	std::transform(ringSettings.begin(), ringSettings.end(), ringSettings.begin(), ::toupper);
 }
 
 void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, char &eachCharacter)
 {
+    for (auto i = 0; i < 3; i++)
+	{
+		rotors[i].ringApply(rotors[i].ring);
+	}
+
 	for (auto i = 2; i > -1; i--)
 	{
-		rotors[i].substitute(eachCharacter, rotors[i].ring, 's');
+		rotors[i].substitute(eachCharacter, 's');
 	}
 
 	reflector.reflectorSubstitute(eachCharacter);
 
 	for (auto i = 0; i < 3; i++)
 	{
-		rotors[i].substitute(eachCharacter, rotors[i].ring, 'r');
-		rotors[i].offset();
+		rotors[i].substitute(eachCharacter, 'r');
 	}
 }
 
@@ -101,12 +113,13 @@ int Enigma::start()
 			wholeCycle(rotors, reflector, eachCharacter);
 		}
 	}
-	std::cout << "Ciphered message: " << message << std::endl;
+	std::cout << "Ciphered message:  " << message << std::endl;
 
-	// TODO 1. plugboard
-	// TODO 2. default settings
-	// TODO 3. README
-	// TODO 4. UI (optional)
+	// TODO 1. offsets and notches
+	// TODO 2. plugboard
+	// TODO 3. default settings
+	// TODO 4. README
+	// TODO 5. UI (optional)
 
 	return EXIT_SUCCESS;
 }

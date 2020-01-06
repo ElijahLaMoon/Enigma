@@ -9,14 +9,14 @@ public:
     std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char ring;
     void setRotor(int);
-    void substitute(char &, char, char);
+    void substitute(char &, char);
     void offset();
     void ringApply(char);
 
 private:
     std::string rotor;
     std::string inverseRotor;
-    // TODO turn m_rotors to either std::array<...> or constexpr static?
+    // TODO turn rotors to either std::array<...> or constexpr static?
     const std::string rotors[5] =
     {
     //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -29,6 +29,7 @@ private:
 
     const std::string inverseRotors[5] =
     {
+    //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         "UWYGADFPVZBECKMTHXSLRINQOJ",
         "AJPCZWRLFBDKOTYUQGENHXMIVS",
         "TAGBPCSDQEUFVNZHYIXJWLRKOM",

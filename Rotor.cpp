@@ -16,9 +16,8 @@ void Rotor::setRotor(int choice)
     }
 }
 
-void Rotor::substitute(char &eachCharacter, char ring, char mode)
+void Rotor::substitute(char &eachCharacter, char mode)
 {
-    ringApply(ring);
     switch (mode)
     {
     case 's':
@@ -67,5 +66,6 @@ void Rotor::ringApply(char ring)
                 ++rotorIterator;
             }
         }
+        std::rotate(inverseRotor.rbegin(), inverseRotor.rbegin() + 1, inverseRotor.rend());
     }
 }
