@@ -47,17 +47,7 @@ void Rotor::substitute(char &eachCharacter, char ring, char mode)
 
 void Rotor::offset()
 {
-    for (auto &alphabetIterator : alphabet)
-    {
-        if (alphabetIterator == 'A')
-        {
-            alphabetIterator = 'Z';
-        }
-        else
-        {
-            --alphabetIterator;
-        }
-    }
+    std::rotate(alphabet.rbegin(), alphabet.rbegin() + 1, alphabet.rend());
 }
 
 void Rotor::ringApply(char ring)
