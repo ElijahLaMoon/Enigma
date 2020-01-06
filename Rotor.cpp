@@ -56,6 +56,16 @@ void Rotor::ringApply(char ring)
     auto numberOfIterations = ring - 65;
     for (int i = 0; i < numberOfIterations; i++)
     {
-        offset();
+        for (auto &rotorIterator : rotor)
+        {
+            if (rotorIterator == 'Z')
+            {
+                rotorIterator = 'A';
+            }
+            else
+            {
+                ++rotorIterator;
+            }
+        }
     }
 }
