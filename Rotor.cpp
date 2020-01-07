@@ -32,7 +32,7 @@ void Rotor::substitute(char &eachCharacter, char mode)
         break;
     
     case 'r':
-        for (auto alphabetIterator = alphabet.begin(), inverseRotorIterator = inverseRotor.begin(); alphabetIterator != alphabet.end(), inverseRotorIterator != inverseRotor.end(); ++alphabetIterator, ++inverseRotorIterator)
+        for (auto alphabetIterator = iAlphabet.begin(), inverseRotorIterator = inverseRotor.begin(); alphabetIterator != iAlphabet.end(), inverseRotorIterator != inverseRotor.end(); ++alphabetIterator, ++inverseRotorIterator)
         {
             if (eachCharacter == *alphabetIterator)
             {
@@ -46,7 +46,18 @@ void Rotor::substitute(char &eachCharacter, char mode)
 
 void Rotor::offset()
 {
-    std::rotate(alphabet.rbegin(), alphabet.rbegin() + 1, alphabet.rend());
+    for (auto &rotorIterator : rotor)
+    {
+        if (rotorIterator == 'Z')
+        {
+            rotorIterator = 'A';
+        }
+        else
+        {
+            ++rotorIterator;
+        }
+    }
+    std::rotate(inverseRotor.rbegin(), inverseRotor.rbegin() + 1, inverseRotor.rend());
 }
 
 void Rotor::ringApply(char ring)
@@ -55,17 +66,17 @@ void Rotor::ringApply(char ring)
     auto numberOfIterations = ring - 65;
     for (int i = 0; i < numberOfIterations; i++)
     {
-        for (auto &rotorIterator : rotor)
+        std::rotate(alphabet.rbegin(), alphabet.rbegin() + 1, alphabet.rend());
+        for (auto &inverseRotorIterator : inverseRotor)
         {
-            if (rotorIterator == 'Z')
+            if (inverseRotorIterator == 'A')
             {
-                rotorIterator = 'A';
+                inverseRotorIterator = 'Z';
             }
             else
             {
-                ++rotorIterator;
+                --inverseRotorIterator;
             }
         }
-        std::rotate(inverseRotor.rbegin(), inverseRotor.rbegin() + 1, inverseRotor.rend());
     }
 }

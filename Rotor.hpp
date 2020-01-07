@@ -6,7 +6,8 @@
 class Rotor
 {
 public:
-    std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    std::string alphabet =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    std::string iAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char ring;
     void setRotor(int);
     void substitute(char &, char);
@@ -37,7 +38,8 @@ private:
         "QCYLXWENFTZOSMVJUDKGIARPHB"
     };
 
-    std::string m_plugboard[10]
+    // TODO plugboard should be totaly separated and try to make it in pairs(?)
+    std::string plugboard[10]
     {
         "\0\0",
         "\0\0",

@@ -44,6 +44,8 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 
 void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, char &eachCharacter)
 {
+	rotors.at(2).offset();
+	
     for (auto i = 0; i < 3; i++)
 	{
 		rotors[i].ringApply(rotors[i].ring);
@@ -115,11 +117,12 @@ int Enigma::start()
 	}
 	std::cout << "Ciphered message:  " << message << std::endl;
 
-	// TODO 1. offsets and notches
-	// TODO 2. plugboard
-	// TODO 3. default settings
-	// TODO 4. README
-	// TODO 5. UI (optional)
+	// TODO 1. check whether inputs (indexes and rings) are correct
+	// TODO 2. offsets and notches
+	// TODO 3. plugboard
+	// TODO 4. default settings
+	// TODO 5. README
+	// TODO 6. UI (optional)
 
 	return EXIT_SUCCESS;
 }
