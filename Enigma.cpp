@@ -3,12 +3,13 @@
 #include <iostream>
 #include <string>
 #include "Enigma.hpp"
+#include "Plugboard.hpp"
 #include "Reflector.hpp"
 #include "Rotor.hpp"
 
-bool Enigma::duplicateCheck(int indexOne, int indexTwo, int indexThree)
+bool Enigma::duplicateCheck(std::array<int, 3> &rotorIndexes)
 {
-	if (indexOne == indexTwo || indexOne == indexThree || indexTwo == indexThree)
+	if (rotorIndexes[0] == rotorIndexes[1] || rotorIndexes[1] == rotorIndexes[2] || rotorIndexes[0] == rotorIndexes[2])
 	{
 		std::cout << "Bad input. Try again" << std::endl;
 		return true;
@@ -18,6 +19,21 @@ bool Enigma::duplicateCheck(int indexOne, int indexTwo, int indexThree)
 		return false;
 	}
 }
+
+
+bool Enigma::correctInput(int choice)
+{
+    if (choice > 0 && choice < 6)
+	{
+		return false;
+	}
+	else
+	{
+		std::cout << "Bad input. Try again" << std::endl;
+		return true;
+	}
+}
+
 
 bool Enigma::setRingSettings(std::string &ringSettings)
 {
@@ -42,10 +58,18 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 	}
 }
 
-void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, char &eachCharacter)
+void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, char &eachCharacter, int &offsetCounter)
 {
-	rotors.at(2).offset();
-	
+	rotors[2].offset();
+	if (offsetCounter > 25)
+	{
+		rotors[1].offset();
+		if (offsetCounter > 675)
+		{
+			rotors[0].offset();
+		}
+	}
+
     for (auto i = 0; i < 3; i++)
 	{
 		rotors[i].ringApply(rotors[i].ring);
@@ -62,28 +86,32 @@ void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, char
 	{
 		rotors[i].substitute(eachCharacter, 'r');
 	}
+
+	offsetCounter++;
 }
 
 int Enigma::start()
 {
 	std::array<Rotor, 3> rotors;
-	int rotorIndexes[3];
+	std::array<int, 3> rotorIndexes; 
 
 	std::cout << "Set up 3 rotors. Choose from 1 to 5. Repeats restricted" << std::endl;
 
 	std::cout << "First rotor: ";
 	std::cin >> rotorIndexes[0];
-	// TODO add check whether correctInput()
-	rotors[0].setRotor(rotorIndexes[0]);
+	if (correctInput(rotorIndexes[0]))
+	{
+		return EXIT_FAILURE;
+	}
 	std::cout << "Second rotor: ";
 	std::cin >> rotorIndexes[1];
-	if (duplicateCheck(rotorIndexes[0], rotorIndexes[1], rotorIndexes[2]))
+	if (duplicateCheck(rotorIndexes) || correctInput(rotorIndexes[1]))
 	{
 		return EXIT_FAILURE;
 	}
 	std::cout << "Third rotor: ";
 	std::cin >> rotorIndexes[2];
-	if (duplicateCheck(rotorIndexes[0], rotorIndexes[1], rotorIndexes[2]))
+	if (duplicateCheck(rotorIndexes) || correctInput(rotorIndexes[2]))
 	{
 		return EXIT_FAILURE;
 	}
@@ -104,6 +132,7 @@ int Enigma::start()
 
 	Reflector reflector;
 	std::string message;
+	int offsetCounter;
 	std::cout << "Type your message: ";
 	std::cin.ignore();
 	std::getline(std::cin, message);
@@ -112,40 +141,13 @@ int Enigma::start()
 	{
 		if (eachCharacter > 64 && eachCharacter < 91)
 		{
-			wholeCycle(rotors, reflector, eachCharacter);
+			wholeCycle(rotors, reflector, eachCharacter, offsetCounter);
 		}
 	}
 	std::cout << "Ciphered message:  " << message << std::endl;
 
-	// TODO 1. check whether inputs (indexes and rings) are correct
-	// TODO 2. offsets and notches
-	// TODO 3. plugboard
-	// TODO 4. default settings
-	// TODO 5. README
-	// TODO 6. UI (optional)
+	// TODO 1. plugboard
+	// TODO 2. README
 
 	return EXIT_SUCCESS;
 }
-
-/*
-bool Enigma::defaultSettings()
-{
-	bool isDefaultOptions;
-	char option;
-	std::cout << "Would you like to use default settings (y/n)?" << std::endl;
-	std::cin >> option;
-	do
-	{
-		if (option == 'y' || option == 'Y')
-		{
-			isDefaultOptions = true;
-		}
-		else if (option == 'n' || option == 'N')
-		{
-			isDefaultOptions = false;
-		}
-	} while (!(option == 'y' || option == 'n' || option == 'Y' || option == 'N'));
-
-	return isDefaultOptions;
-}
-*/

@@ -7,10 +7,10 @@ class Reflector
 {
 public:
     void reflectorSubstitute(char &);
-    std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    std::string alphabet =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 private:
-    std::string _reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+    std::string reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
 };
 
 #endif

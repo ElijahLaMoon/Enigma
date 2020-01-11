@@ -5,15 +5,6 @@
 
 class Rotor
 {
-public:
-    std::string alphabet =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    std::string iAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char ring;
-    void setRotor(int);
-    void substitute(char &, char);
-    void offset();
-    void ringApply(char);
-
 private:
     std::string rotor;
     std::string inverseRotor;
@@ -38,21 +29,14 @@ private:
         "QCYLXWENFTZOSMVJUDKGIARPHB"
     };
 
-    // TODO plugboard should be totaly separated and try to make it in pairs(?)
-    std::string plugboard[10]
-    {
-        "\0\0",
-        "\0\0",
-        "\0\0",
-        "\0\0",
-        "\0\0",
-        "\0\0",
-        "\0\0",
-        "\0\0",
-        "\0\0",
-        "\0\0"
-    };
-
+public:
+    std::string alphabet =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    std::string iAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char ring;
+    void setRotor(int);
+    void substitute(char &, char);
+    void offset();
+    void ringApply(char);
 };
 
 #endif

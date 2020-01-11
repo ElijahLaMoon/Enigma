@@ -4,16 +4,9 @@
 
 void Rotor::setRotor(int choice)
 {
-    if (choice > 0 && choice < 6)
-    {
-        --choice; //people count from 1, unlike machines
-        rotor = rotors[choice];
-        inverseRotor = inverseRotors[choice];
-    }
-    else
-    {
-        std::cout << "Bad input. Try again" << std::endl;
-    }
+    --choice; //people count from 1, unlike machines
+    rotor = rotors[choice];
+    inverseRotor = inverseRotors[choice];
 }
 
 void Rotor::substitute(char &eachCharacter, char mode)
