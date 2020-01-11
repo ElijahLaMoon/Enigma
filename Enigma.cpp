@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Enigma.hpp"
+#include "Plugboard.hpp"
 #include "Reflector.hpp"
 #include "Rotor.hpp"
 
@@ -18,7 +19,6 @@ bool Enigma::duplicateCheck(std::array<int, 3> &rotorIndexes)
 		return false;
 	}
 }
-
 
 bool Enigma::correctInput(int choice)
 {
@@ -57,7 +57,7 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 	}
 }
 
-void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, char &eachCharacter, int &offsetCounter)
+void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, Plugboard &plugboard, char &eachCharacter, int &offsetCounter)
 {
 	rotors[2].offset();
 	if (offsetCounter > 25)
@@ -129,6 +129,19 @@ int Enigma::start()
 		rotors[i].ring = ringSettings[0][i];
 	}
 
+	Plugboard plugboard;
+	char plugboardChoice;
+	std::cout << "Would you like to set up plugboard? Y/y to set up or any other character to skip: ";
+	std::cin >> plugboardChoice;
+	if (plugboardChoice == 'y' || plugboardChoice == 'Y')
+	{
+    	std::cout << "Type characters in pairs (i.e. \"KL ON ...\"). No more than 13 pairs" << std::endl;
+		if (plugboard.setPlugboard())
+		{
+			return EXIT_FAILURE;
+		}
+	}
+ 
 	Reflector reflector;
 	std::string message;
 	int offsetCounter;
@@ -140,7 +153,7 @@ int Enigma::start()
 	{
 		if (eachCharacter > 64 && eachCharacter < 91)
 		{
-			wholeCycle(rotors, reflector, eachCharacter, offsetCounter);
+			wholeCycle(rotors, reflector, plugboard, eachCharacter, offsetCounter);
 		}
 	}
 	std::cout << "Ciphered message:  " << message << std::endl;

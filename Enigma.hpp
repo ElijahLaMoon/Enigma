@@ -3,6 +3,7 @@
 
 #include <array>
 #include <string>
+#include "Plugboard.hpp"
 #include "Reflector.hpp"
 #include "Rotor.hpp"
 
@@ -14,7 +15,7 @@ public:
     bool duplicateCheck(std::array<int, 3> &);
     bool correctInput(int);
     bool setRingSettings(std::string &);
-    void wholeCycle(std::array<Rotor, 3> &, Reflector &, char &, int &);
+    void wholeCycle(std::array<Rotor, 3> &, Reflector &, Plugboard &, char &, int &);
     int start();
 };
 
