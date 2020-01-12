@@ -15,7 +15,7 @@ public:
     bool duplicateCheck(std::array<int, 3> &);
     bool correctInput(int);
     bool setRingSettings(std::string &);
-    void wholeCycle(std::array<Rotor, 3> &, Reflector &, Plugboard &, char &, int &);
+    void encipher(std::array<Rotor, 3> &, Reflector &, Plugboard &, char &, int &);
     int start();
 };
 

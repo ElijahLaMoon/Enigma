@@ -10,12 +10,12 @@ class Plugboard
 {
 private:    
     std::map<char, char> plugboard;
-    std::string plugboardCopy;
 
 public:
     bool plugboardDuplicateCheck(std::string &);
     bool lengthCheck(std::string &);
-    bool setPlugboard();
+    bool setPlugboard(std::string &);
+    void substitute(char &);
 };
 
 #endif

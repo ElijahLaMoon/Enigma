@@ -57,8 +57,9 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 	}
 }
 
-void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, Plugboard &plugboard, char &eachCharacter, int &offsetCounter)
+void Enigma::encipher(std::array<Rotor, 3> &rotors, Reflector &reflector, Plugboard &plugboard, char &eachCharacter, int &offsetCounter)
 {
+	plugboard.substitute(eachCharacter);
 	rotors[2].offset();
 	if (offsetCounter > 25)
 	{
@@ -85,14 +86,15 @@ void Enigma::wholeCycle(std::array<Rotor, 3> &rotors, Reflector &reflector, Plug
 	{
 		rotors[i].substitute(eachCharacter, 'r');
 	}
-
 	offsetCounter++;
+
+	plugboard.substitute(eachCharacter);
 }
 
 int Enigma::start()
 {
 	std::array<Rotor, 3> rotors;
-	std::array<int, 3> rotorIndexes; 
+	std::array<int, 3> rotorIndexes = {0, 0, 0}; 
 
 	std::cout << "Set up 3 rotors. Choose from 1 to 5. Repeats restricted" << std::endl;
 
@@ -130,16 +132,29 @@ int Enigma::start()
 	}
 
 	Plugboard plugboard;
-	char plugboardChoice;
-	std::cout << "Would you like to set up plugboard? Y/y to set up or any other character to skip: ";
-	std::cin >> plugboardChoice;
-	if (plugboardChoice == 'y' || plugboardChoice == 'Y')
+    std::string plugboardCopy;
+	char plugboardOption;
+	std::cout << "Would you like to set up plugboard? Y/N to set up or skip: ";
+	std::cin >> plugboardOption;
+	if (plugboardOption == 'y' || plugboardOption == 'Y')
 	{
     	std::cout << "Type characters in pairs (i.e. \"KL ON ...\"). No more than 13 pairs" << std::endl;
-		if (plugboard.setPlugboard())
+		std::cin.ignore();
+		std::getline(std::cin, plugboardCopy);
+		if (plugboard.setPlugboard(plugboardCopy))
 		{
 			return EXIT_FAILURE;
 		}
+	}
+	else if (plugboardOption == 'n' || plugboardOption == 'N')
+	{
+		std::cout << "Goodbye!" << std::endl;
+		return EXIT_SUCCESS;
+	}
+	else
+	{
+		std::cout << "Bad input. Try again" << std::endl;
+		return EXIT_FAILURE;
 	}
  
 	Reflector reflector;
@@ -153,7 +168,7 @@ int Enigma::start()
 	{
 		if (eachCharacter > 64 && eachCharacter < 91)
 		{
-			wholeCycle(rotors, reflector, plugboard, eachCharacter, offsetCounter);
+			encipher(rotors, reflector, plugboard, eachCharacter, offsetCounter);
 		}
 	}
 	std::cout << "Ciphered message:  " << message << std::endl;
