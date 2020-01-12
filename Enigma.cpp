@@ -134,7 +134,7 @@ int Enigma::start()
 	Plugboard plugboard;
     std::string plugboardCopy;
 	char plugboardOption;
-	std::cout << "Would you like to set up plugboard? Y/N to set up or skip: ";
+	std::cout << "Would you like to set up plugboard? Y/y to set up or any other character to skip: ";
 	std::cin >> plugboardOption;
 	if (plugboardOption == 'y' || plugboardOption == 'Y')
 	{
@@ -146,15 +146,10 @@ int Enigma::start()
 			return EXIT_FAILURE;
 		}
 	}
-	else if (plugboardOption == 'n' || plugboardOption == 'N')
+	else
 	{
 		std::cout << "Goodbye!" << std::endl;
 		return EXIT_SUCCESS;
-	}
-	else
-	{
-		std::cout << "Bad input. Try again" << std::endl;
-		return EXIT_FAILURE;
 	}
  
 	Reflector reflector;
