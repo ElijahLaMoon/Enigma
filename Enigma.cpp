@@ -146,11 +146,6 @@ int Enigma::start()
 			return EXIT_FAILURE;
 		}
 	}
-	else
-	{
-		std::cout << "Goodbye!" << std::endl;
-		return EXIT_SUCCESS;
-	}
  
 	Reflector reflector;
 	std::string message;
