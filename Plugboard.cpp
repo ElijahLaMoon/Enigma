@@ -7,20 +7,18 @@
 
 bool Plugboard::plugboardDuplicateCheck()
 {
-    for (int firstCharacter = 0, secondCharacter = firstCharacter + 1;
-        secondCharacter < plugboardCopy.length();
-        ++firstCharacter, ++secondCharacter)
+    for (int firstCharacter = 0; firstCharacter < plugboardCopy.length() - 1;++firstCharacter)
     {
-        if (plugboardCopy[firstCharacter] == plugboardCopy[secondCharacter])
+        for (int secondCharacter = firstCharacter + 1; secondCharacter < plugboardCopy.length(); ++secondCharacter)
         {
-            std::cout << "Bad input. Try again" << std::endl;
-            return true;
-        }
-        else
-        {
-            return false;
+            if (plugboardCopy[firstCharacter] == plugboardCopy[secondCharacter])
+            {
+                std::cout << "Bad input. Try again" << std::endl;
+                return true;
+            }
         }
     }
+    return false;
 }
 
 bool Plugboard::lengthCheck()
@@ -51,7 +49,7 @@ bool Plugboard::setPlugboard()
     
     for (int firstCharacter = 0, secondCharacter = firstCharacter + 1;
             secondCharacter < plugboardCopy.length();
-            firstCharacter += 2, ++secondCharacter += 2)
+            firstCharacter += 2, secondCharacter += 2)
     {
         auto pair = std::make_pair(plugboardCopy[firstCharacter], plugboardCopy[secondCharacter]);
         plugboard.emplace(pair);

@@ -134,7 +134,6 @@ int Enigma::start()
 	}
 
 	Plugboard plugboard;
-    std::string plugboardCopy;
 	char plugboardOption;
 	std::cout << "Would you like to set up plugboard? Y/y to set up or any other character to skip: ";
 	std::cin >> plugboardOption;
@@ -148,7 +147,7 @@ int Enigma::start()
  
 	Reflector reflector;
 	std::string message;
-	int offsetCounter;
+	int offsetCounter = 0;
 	std::cout << "Type your message: ";
 	if (!(plugboardOption == 'y' || plugboardOption == 'Y')) std::cin.ignore();
 	std::getline(std::cin, message);
@@ -161,8 +160,6 @@ int Enigma::start()
 		}
 	}
 	std::cout << "Ciphered message:  " << message << std::endl;
-
-	// TODO 2. README
 
 	return EXIT_SUCCESS;
 }
