@@ -14,7 +14,9 @@ void Rotor::substitute(char &eachCharacter, char mode)
     switch (mode)
     {
     case 's':
-        for (auto alphabetIterator = alphabet.begin(), rotorIterator = rotor.begin(); alphabetIterator != alphabet.end(), rotorIterator != rotor.end(); ++alphabetIterator, ++rotorIterator)
+        for (auto alphabetIterator = alphabet.begin(), rotorIterator = rotor.begin();
+                alphabetIterator != alphabet.end();
+                ++alphabetIterator, ++rotorIterator)
         {
             if (eachCharacter == *alphabetIterator)
             {
@@ -25,7 +27,9 @@ void Rotor::substitute(char &eachCharacter, char mode)
         break;
     
     case 'r':
-        for (auto alphabetIterator = iAlphabet.begin(), inverseRotorIterator = inverseRotor.begin(); alphabetIterator != iAlphabet.end(), inverseRotorIterator != inverseRotor.end(); ++alphabetIterator, ++inverseRotorIterator)
+        for (auto alphabetIterator = iAlphabet.begin(), inverseRotorIterator = inverseRotor.begin();
+                alphabetIterator != iAlphabet.end();
+                ++alphabetIterator, ++inverseRotorIterator)
         {
             if (eachCharacter == *alphabetIterator)
             {
