@@ -9,7 +9,9 @@
 
 bool Enigma::duplicateCheck(std::array<int, 3> &rotorIndexes)
 {
-	if (rotorIndexes[0] == rotorIndexes[1] || rotorIndexes[1] == rotorIndexes[2] || rotorIndexes[0] == rotorIndexes[2])
+	if (rotorIndexes[0] == rotorIndexes[1] 
+	||	rotorIndexes[1] == rotorIndexes[2] 
+	||	rotorIndexes[0] == rotorIndexes[2])
 	{
 		std::cout << "Bad input. Try again" << std::endl;
 		return true;
@@ -138,10 +140,7 @@ int Enigma::start()
 	std::cin >> plugboardOption;
 	if (plugboardOption == 'y' || plugboardOption == 'Y')
 	{
-    	std::cout << "Type characters in pairs (i.e. \"KL ON ...\"). No more than 13 pairs" << std::endl;
-		std::cin.ignore();
-		std::getline(std::cin, plugboardCopy);
-		if (plugboard.setPlugboard(plugboardCopy))
+		if (plugboard.setPlugboard())
 		{
 			return EXIT_FAILURE;
 		}
@@ -151,7 +150,7 @@ int Enigma::start()
 	std::string message;
 	int offsetCounter;
 	std::cout << "Type your message: ";
-	std::cin.ignore();
+	if (!(plugboardOption == 'y' || plugboardOption == 'Y')) std::cin.ignore();
 	std::getline(std::cin, message);
     std::transform(message.begin(), message.end(), message.begin(), ::toupper);
 	for (auto &eachCharacter : message)
@@ -163,7 +162,6 @@ int Enigma::start()
 	}
 	std::cout << "Ciphered message:  " << message << std::endl;
 
-	// TODO 1. plugboard
 	// TODO 2. README
 
 	return EXIT_SUCCESS;
