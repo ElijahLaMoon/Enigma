@@ -17,6 +17,7 @@ int main()
 	} while (menu);
 	
 	std::cout << "Press Enter to exit..." << std::endl;
+	std::cin.ignore();
 	std::cin.get();
 
 	return EXIT_SUCCESS;
