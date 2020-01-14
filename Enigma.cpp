@@ -8,7 +8,7 @@
 #include "Reflector.hpp"
 #include "Rotor.hpp"
 
-bool Enigma::duplicateCheck(std::array<int, 3> &rotorIndexes)
+bool Enigma::duplicateCheck(std::array<int, 3> rotorIndexes)
 {
 	if (rotorIndexes[0] == rotorIndexes[1] 
 	||	rotorIndexes[1] == rotorIndexes[2] 
@@ -25,17 +25,21 @@ bool Enigma::duplicateCheck(std::array<int, 3> &rotorIndexes)
 
 bool Enigma::correctInput(int choice)
 {
-    if (choice > 0 && choice < 6)
+    if (choice > 0 && choice < 6) 
 	{
 		return false;
 	}
 	else
 	{
-		std::cout << "Error: incorrect input. There're only 5 rotors" << std::endl;
+		std::cout << "Error: incorrect input. There're only rotors 1-5" << std::endl;
 		return true;
 	}
 }
 
+int Enigma::atoi(char charToInteger)
+{
+	return static_cast<int>(charToInteger) - 48;
+}
 
 bool Enigma::setRingSettings(std::string &ringSettings)
 {
@@ -50,7 +54,7 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 	{
 		for (auto &iterator : ringSettings)
 		{
-			if (!(iterator > 64 && iterator < 91))
+			if (!(iterator > 64 && iterator < 91)) //65 == 'A', 90 == 'Z'
 			{
 				std::cout << "Error: rings should be alphabetical characters (A-Z)" << std::endl;
 				return true;
@@ -97,24 +101,28 @@ void Enigma::encipher(std::array<Rotor, 3> &rotors, Reflector &reflector, Plugbo
 int Enigma::start()
 {
 	std::array<Rotor, 3> rotors;
-	std::array<int, 3> rotorIndexes = {0, 0, 0}; 
+	std::array<int, 3> rotorIndexes = {0, 0, 0};
+	char tempStorage = '0'; 
 
 	std::cout << "Set up 3 rotors. Choose from 1 to 5. Repeats restricted" << std::endl;
 
 	std::cout << "First rotor: ";
-	std::cin >> rotorIndexes[0];
+	std::cin >> tempStorage;
+	rotorIndexes[0] = atoi(tempStorage);
 	if (correctInput(rotorIndexes[0]))
 	{
 		return EXIT_FAILURE;
 	}
 	std::cout << "Second rotor: ";
-	std::cin >> rotorIndexes[1];
+	std::cin >> tempStorage;
+	rotorIndexes[1] = atoi(tempStorage);
 	if (duplicateCheck(rotorIndexes) || correctInput(rotorIndexes[1]))
 	{
 		return EXIT_FAILURE;
 	}
 	std::cout << "Third rotor: ";
-	std::cin >> rotorIndexes[2];
+	std::cin >> tempStorage;
+	rotorIndexes[2] = atoi(tempStorage);
 	if (duplicateCheck(rotorIndexes) || correctInput(rotorIndexes[2]))
 	{
 		return EXIT_FAILURE;
@@ -155,7 +163,7 @@ int Enigma::start()
 	std::transform(message.begin(), message.end(), message.begin(), ::toupper);
 	for (auto &eachCharacter : message)
 	{
-		if (eachCharacter > 64 && eachCharacter < 91)
+		if (eachCharacter > 64 && eachCharacter < 91)	// 65 == 'A', 90 == 'Z'
 		{
 			encipher(rotors, reflector, plugboard, eachCharacter, offsetCounter);
 		}
