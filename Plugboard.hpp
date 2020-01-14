@@ -13,6 +13,7 @@ private:
 public:
     bool plugboardDuplicateCheck();
     bool lengthCheck();
+    bool correctInputCheck();
     bool setPlugboard();
     void substitute(char &);
 };

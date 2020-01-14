@@ -13,7 +13,7 @@ bool Plugboard::plugboardDuplicateCheck()
         {
             if (plugboardCopy[firstCharacter] == plugboardCopy[secondCharacter])
             {
-                std::cout << "Bad input. Try again" << std::endl;
+                std::cout << "Error: duplicates found" << std::endl;
                 return true;
             }
         }
@@ -25,13 +25,26 @@ bool Plugboard::lengthCheck()
 {
     if (plugboardCopy.length() / 2 > 13)
     {
-        std::cout << "Bad input. Try again" << std::endl;
+        std::cout << "Error: too much pairs. There should no more than 13 pairs" << std::endl;
         return true;
     }
     else
     {
         return false;
     }
+}
+
+bool Plugboard::correctInputCheck()
+{
+    for (auto &iterator : plugboardCopy)
+    {
+        if (!(iterator > 64 && iterator < 91))
+        {
+            std::cout << "Error: plugboard should contain only alphabetical characters (A-Z)" << std::endl;
+            return true;
+		}
+	}
+    return false;
 }
 
 bool Plugboard::setPlugboard()
@@ -42,7 +55,7 @@ bool Plugboard::setPlugboard()
     std::transform(plugboardCopy.begin(), plugboardCopy.end(), plugboardCopy.begin(), ::toupper);
     plugboardCopy.erase(std::remove(plugboardCopy.begin(), plugboardCopy.end(), ' '), plugboardCopy.end());
 
-    if (plugboardDuplicateCheck() || lengthCheck())
+    if (plugboardDuplicateCheck() || lengthCheck() || correctInputCheck())
     {
         return true;
     }
