@@ -67,15 +67,23 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 void Enigma::encipher(std::array<Rotor, 3> &rotors, Reflector &reflector, Plugboard &plugboard, char &eachCharacter, int &offsetCounter)
 {
 	plugboard.substitute(eachCharacter);
+	
 	rotors[2].offset();
-	if (offsetCounter > 25)
+	if (offsetCounter / 26 > 0)
 	{
-		rotors[1].offset();
-		if (offsetCounter > 675)
+		for (int secondOffsetCounter = offsetCounter / 26; secondOffsetCounter > 0; --secondOffsetCounter)
 		{
-			rotors[0].offset();
+			rotors[1].offset();
+		}
+		if (offsetCounter / 676 > 0)
+		{
+			for (int thirdOffsetCounter = offsetCounter / 676; thirdOffsetCounter > 0; --thirdOffsetCounter)
+			{
+				rotors[0].offset();
+			}
 		}
 	}
+	++offsetCounter;
 
     for (auto i = 0; i < 3; i++)
 	{
@@ -93,7 +101,6 @@ void Enigma::encipher(std::array<Rotor, 3> &rotors, Reflector &reflector, Plugbo
 	{
 		rotors[i].substitute(eachCharacter, 'r');
 	}
-	++offsetCounter;
 
 	plugboard.substitute(eachCharacter);
 }
