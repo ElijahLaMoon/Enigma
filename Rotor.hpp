@@ -8,7 +8,7 @@ class Rotor
 private:
     std::string rotor;
     std::string inverseRotor;
-    // TODO turn rotors to either std::array<...> or constexpr static?
+
     const std::string rotors[5] =
     {
     //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

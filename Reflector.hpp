@@ -5,12 +5,12 @@
 
 class Reflector
 {
+private:
+    std::string reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+
 public:
     void reflectorSubstitute(char &);
     std::string alphabet =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-private:
-    std::string reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
 };
 
 #endif
