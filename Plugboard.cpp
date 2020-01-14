@@ -7,9 +7,9 @@
 
 bool Plugboard::plugboardDuplicateCheck()
 {
-    for (int firstCharacter = 0; firstCharacter < plugboardCopy.length() - 1;++firstCharacter)
+    for (size_t firstCharacter = 0; firstCharacter < plugboardCopy.length() - 1; ++firstCharacter)
     {
-        for (int secondCharacter = firstCharacter + 1; secondCharacter < plugboardCopy.length(); ++secondCharacter)
+        for (size_t secondCharacter = firstCharacter + 1; secondCharacter < plugboardCopy.length(); ++secondCharacter)
         {
             if (plugboardCopy[firstCharacter] == plugboardCopy[secondCharacter])
             {
@@ -60,7 +60,7 @@ bool Plugboard::setPlugboard()
         return true;
     }
     
-    for (int firstCharacter = 0, secondCharacter = firstCharacter + 1;
+    for (size_t firstCharacter = 0, secondCharacter = firstCharacter + 1;
             secondCharacter < plugboardCopy.length();
             firstCharacter += 2, secondCharacter += 2)
     {
