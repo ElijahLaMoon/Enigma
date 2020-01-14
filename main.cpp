@@ -12,7 +12,14 @@ int main()
 		enigma.start();
 		std::cout << "Would you like to encrypt something else? (Y)es or (N)o: ";
 		std::cin >> choice;
-		if (choice == 'Y' || choice == 'y') menu = true;
+		if (choice == 'Y' || choice == 'y')
+		{
+			menu = true;
+		}
+		else
+		{
+			menu = false;
+		}
 		std::cout << std::endl;
 	} while (menu);
 	
