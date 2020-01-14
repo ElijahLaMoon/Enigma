@@ -59,7 +59,6 @@ void Rotor::offset()
 
 void Rotor::ringApply(char ring)
 {
-    ring = toupper(ring);
     auto numberOfIterations = ring - 65;
     for (int i = 0; i < numberOfIterations; i++)
     {
