@@ -6,7 +6,7 @@ int main()
 	std::cout << "Welcome to Enigma!" << std::endl;
 	Enigma enigma;
 	char choice;
-	bool menu = false;
+	bool menu;
 	do
 	{
 		enigma.start();
