@@ -9,8 +9,8 @@ private:
     std::string reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
 
 public:
-    void reflectorSubstitute(char &);
     std::string alphabet =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    void reflectorSubstitute(char &);
 };
 
 #endif
