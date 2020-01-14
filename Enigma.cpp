@@ -109,27 +109,27 @@ int Enigma::start()
 {
 	std::array<Rotor, 3> rotors;
 	std::array<int, 3> rotorIndexes = {0, 0, 0};
-	char tempStorage = '0'; 
+	char buffer = '0'; 
 
 	std::cout << "Set up 3 rotors. Choose from 1 to 5. Repeats restricted" << std::endl;
 
 	std::cout << "First rotor: ";
-	std::cin >> tempStorage;
-	rotorIndexes[0] = atoi(tempStorage);
+	std::cin >> buffer;
+	rotorIndexes[0] = atoi(buffer);
 	if (correctInput(rotorIndexes[0]))
 	{
 		return EXIT_FAILURE;
 	}
 	std::cout << "Second rotor: ";
-	std::cin >> tempStorage;
-	rotorIndexes[1] = atoi(tempStorage);
+	std::cin >> buffer;
+	rotorIndexes[1] = atoi(buffer);
 	if (duplicateCheck(rotorIndexes) || correctInput(rotorIndexes[1]))
 	{
 		return EXIT_FAILURE;
 	}
 	std::cout << "Third rotor: ";
-	std::cin >> tempStorage;
-	rotorIndexes[2] = atoi(tempStorage);
+	std::cin >> buffer;
+	rotorIndexes[2] = atoi(buffer);
 	if (duplicateCheck(rotorIndexes) || correctInput(rotorIndexes[2]))
 	{
 		return EXIT_FAILURE;
