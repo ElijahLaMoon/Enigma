@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "Enigma.hpp"
 #include "Plugboard.hpp"
@@ -13,7 +14,7 @@ bool Enigma::duplicateCheck(std::array<int, 3> &rotorIndexes)
 	||	rotorIndexes[1] == rotorIndexes[2] 
 	||	rotorIndexes[0] == rotorIndexes[2])
 	{
-		std::cout << "Bad input. Try again" << std::endl;
+		std::cout << "Error: duplicates found" << std::endl;
 		return true;
 	}
 	else
@@ -30,7 +31,7 @@ bool Enigma::correctInput(int choice)
 	}
 	else
 	{
-		std::cout << "Bad input. Try again" << std::endl;
+		std::cout << "Error: incorrect input. There're only 5 rotors" << std::endl;
 		return true;
 	}
 }
@@ -42,7 +43,7 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 	std::transform(ringSettings.begin(), ringSettings.end(), ringSettings.begin(), ::toupper);
 	if (ringSettings.length() != 3)
 	{
-		std::cout << "Bad input. Try again" << std::endl;
+		std::cout << "Error: too much or too few rings. There're should be exactly 3 rings" << std::endl;
 		return true;
 	}
 	else
@@ -51,7 +52,7 @@ bool Enigma::setRingSettings(std::string &ringSettings)
 		{
 			if (!(iterator > 64 && iterator < 91))
 			{
-				std::cout << "Bad input. Try again" << std::endl;
+				std::cout << "Error: rings should be alphabetical characters (A-Z)" << std::endl;
 				return true;
 			}
 		}
@@ -88,7 +89,7 @@ void Enigma::encipher(std::array<Rotor, 3> &rotors, Reflector &reflector, Plugbo
 	{
 		rotors[i].substitute(eachCharacter, 'r');
 	}
-	offsetCounter++;
+	++offsetCounter;
 
 	plugboard.substitute(eachCharacter);
 }
@@ -151,7 +152,7 @@ int Enigma::start()
 	std::cout << "Type your message: ";
 	if (!(plugboardOption == 'y' || plugboardOption == 'Y')) std::cin.ignore();
 	std::getline(std::cin, message);
-    std::transform(message.begin(), message.end(), message.begin(), ::toupper);
+	std::transform(message.begin(), message.end(), message.begin(), ::toupper);
 	for (auto &eachCharacter : message)
 	{
 		if (eachCharacter > 64 && eachCharacter < 91)
@@ -160,6 +161,10 @@ int Enigma::start()
 		}
 	}
 	std::cout << "Ciphered message:  " << message << std::endl;
+	std::ofstream result;
+	result.open("result.txt");
+	result << message;
+	result.close();
 
 	return EXIT_SUCCESS;
 }
