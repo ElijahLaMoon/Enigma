@@ -1,33 +1,35 @@
 #ifndef ROTOR_HPP
 #define ROTOR_HPP
 
+#include <array>
 #include <string>
+#include <string_view>
+
+constexpr std::array<std::string_view, 5> rotors =
+{
+//  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "EKMFLGDQVZNTOWYHXUSPAIBRCJ", //rotor I
+    "AJDKSIRUXBLHWTMCQGZNPYFVOE", //rotor II
+    "BDFHJLCPRTXVZNYEIWGAKMUSQO", //rotor III
+    "ESOVPZJAYQUIRHXLNFTGKDCMWB", //rotor IV
+    "VZBRGITYUPSDNHLXAWMJQOFECK"  //rotor V
+};
+
+constexpr std::array<std::string_view, 5> inverseRotors =
+{
+//  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "UWYGADFPVZBECKMTHXSLRINQOJ",
+    "AJPCZWRLFBDKOTYUQGENHXMIVS",
+    "TAGBPCSDQEUFVNZHYIXJWLRKOM",
+    "HZWVARTNLGUPXQCEJMBSKDYOIF",
+    "QCYLXWENFTZOSMVJUDKGIARPHB"
+};
 
 class Rotor
 {
 private:
     std::string rotor;
     std::string inverseRotor;
-
-    const std::string rotors[5] =
-    {
-    //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "EKMFLGDQVZNTOWYHXUSPAIBRCJ", //rotor I
-        "AJDKSIRUXBLHWTMCQGZNPYFVOE", //rotor II
-        "BDFHJLCPRTXVZNYEIWGAKMUSQO", //rotor III
-        "ESOVPZJAYQUIRHXLNFTGKDCMWB", //rotor IV
-        "VZBRGITYUPSDNHLXAWMJQOFECK"  //rotor V
-    };
-
-    const std::string inverseRotors[5] =
-    {
-    //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "UWYGADFPVZBECKMTHXSLRINQOJ",
-        "AJPCZWRLFBDKOTYUQGENHXMIVS",
-        "TAGBPCSDQEUFVNZHYIXJWLRKOM",
-        "HZWVARTNLGUPXQCEJMBSKDYOIF",
-        "QCYLXWENFTZOSMVJUDKGIARPHB"
-    };
 
 public:
     std::string alphabet =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
