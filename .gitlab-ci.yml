@@ -11,7 +11,7 @@ build:
   # before_script:
   #   - apt update && apt -y install cmake make autoconf
   script:
-    - g++ main.cpp Enigma.cpp Rotor.cpp Plugboard.cpp Reflector.cpp -o enigma
+    - g++ -stdc++=17 main.cpp Enigma.cpp Rotor.cpp Plugboard.cpp Reflector.cpp -o enigma
   artifacts:
     paths:
       - enigma
