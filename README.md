@@ -5,4 +5,4 @@
 # 
 ## **HOW TO RUN IT**
 ## **Linux**
-### Go into your terminal and run `$ cmake .`, `$ make` and finally `$ ./enigma`
+### Clone the repository, go into your terminal, and run `$ cmake .`, `$ make` and finally `$ ./enigma`
